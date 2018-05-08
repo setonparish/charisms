@@ -6,6 +6,7 @@ gem 'pg'
 gem 'puma'
 gem 'rails', '~> 5.2.0'
 
+gem 'acts_as_list'
 gem 'bootsnap', require: false
 gem 'sass-rails'
 gem 'turbolinks'
