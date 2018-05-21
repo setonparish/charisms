@@ -9,6 +9,7 @@ gem 'rails', '~> 5.2.0'
 gem 'acts_as_list'
 gem 'bootsnap', require: false
 gem 'friendly_id'
+gem 'haml-rails'
 gem 'sass-rails'
 gem 'turbolinks'
 gem 'uglifier'
@@ -25,5 +26,6 @@ group :development, :test do
 end
 
 group :test do
+  gem 'rails-controller-testing'
   gem 'rspec-rails'
 end
