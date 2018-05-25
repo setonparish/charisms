@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :question_order do
-    survey nil
-    question nil
+    survey
+    question
   end
 end

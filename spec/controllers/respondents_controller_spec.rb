@@ -27,6 +27,11 @@ describe RespondentsController do
         post(:create, params: params)
         expect(session[:respondent_id]).to eq(Respondent.last.id)
       end
+
+      it "redirects to survey_responses#new" do
+        post(:create, params: params)
+        expect(subject).to redirect_to(new_survey_response_path)
+      end
     end
 
     context "with invalid parameters" do

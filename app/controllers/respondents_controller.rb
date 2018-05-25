@@ -8,7 +8,7 @@ class RespondentsController < ApplicationController
 
     if @respondent.save
       session[:respondent_id] = @respondent.id
-      # redirect to survey_responses#new
+      redirect_to new_survey_response_path
     else
       flash.now[:alert] = "Please fix the problems in the form below"
       render :new
