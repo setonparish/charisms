@@ -36,9 +36,11 @@ describe SurveyResponseCreator do
         expect(survey_response.question_responses.size).to eq(2)
 
         expect(survey_response.question_responses[0].question).to eq(question_orders[0].question)
+        expect(survey_response.question_responses[0].position).to eq(question_orders[0].position)
         expect(survey_response.question_responses[0].answer).to be_nil
 
         expect(survey_response.question_responses[1].question).to eq(question_orders[1].question)
+        expect(survey_response.question_responses[1].position).to eq(question_orders[1].position)
         expect(survey_response.question_responses[1].answer).to be_nil
       end
     end

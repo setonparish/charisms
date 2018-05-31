@@ -11,8 +11,10 @@ class SurveyResponseCreator
 
   def run
     SurveyResponse.where(respondent: @respondent, survey: @survey).first_or_initialize.tap do |survey_response|
-      @survey.questions.each do |question|
-        survey_response.question_responses.where(question: question).first_or_initialize
+      @survey.question_order.includes(:question).each do |question_order|
+        survey_response.question_responses
+                       .where(question: question_order.question)
+                       .first_or_initialize(position: question_order.position)
       end
 
       survey_response.save
