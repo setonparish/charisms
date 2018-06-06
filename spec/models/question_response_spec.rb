@@ -9,6 +9,15 @@ describe QuestionResponse do
     end
   end
 
+  describe ".unanswered" do
+    let!(:answered_question_response) { FactoryBot.create(:question_response, answer: "so much to be consoled") }
+    let!(:unanswered_question_response) { FactoryBot.create(:question_response, answer: nil) }
+
+    it "returns answered question_responses" do
+      expect(QuestionResponse.answered).to match_array(answered_question_response)
+    end
+  end
+
   describe ".answered" do
     let!(:answered_question_response) { FactoryBot.create(:question_response, answer: "so much to be consoled") }
     let!(:unanswered_question_response) { FactoryBot.create(:question_response, answer: nil) }

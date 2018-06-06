@@ -9,6 +9,10 @@ class QuestionResponse < ApplicationRecord
     where(answer: nil)
   end
 
+  def self.answered
+    where.not(answer: nil)
+  end
+
   def answered?
     !unanswered?
   end
