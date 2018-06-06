@@ -30,7 +30,7 @@ describe RespondentsController do
 
       it "redirects to survey_responses#new" do
         post(:create, params: params)
-        expect(subject).to redirect_to(new_survey_response_path)
+        expect(subject).to redirect_to(begin_survey_path)
       end
     end
 

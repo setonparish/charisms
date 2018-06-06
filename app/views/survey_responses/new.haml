@@ -2,5 +2,5 @@
 
 %p It is going to take 30 minutes to complete this survey
 
-= form_tag(survey_responses_path, method: :post) do
+= form_tag(begin_survey_path, method: :post) do
   = submit_tag("Start your survey")

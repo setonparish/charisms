@@ -5,8 +5,8 @@ class SurveyResponsesController < ApplicationController
   end
 
   def create
-    if SurveyResponseCreator.new(survey: survey, respondent: respondent).run
-      # redirect to survey responses questions
+    if @survey_response = SurveyResponseCreator.new(survey: survey, respondent: respondent).run
+      redirect_to answer_survey_path(@survey_response)
     else
       flash.now[:alert] = "We had an error creating your survey"
       render :new

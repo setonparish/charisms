@@ -33,7 +33,9 @@ describe SurveyResponsesController do
     let(:call) { post :create }
 
     let(:survey) { FactoryBot.create(:survey) }
+    let(:survey_response) { FactoryBot.create(:survey_response, survey: survey) }
     let(:respondent) { FactoryBot.create(:respondent) }
+    let(:mock_service) { double(:run) }
 
     it_behaves_like "redirects without a respondent"
 
@@ -41,11 +43,11 @@ describe SurveyResponsesController do
       session[:respondent_id] = respondent.id
     end
 
-    it "calls service" do
-      mock_service = double(:run)
+    it "calls service and redirects to survey_responsees#edit" do
       expect(SurveyResponseCreator).to receive(:new).with(survey: survey, respondent: respondent) { mock_service }
-      expect(mock_service).to receive(:run)
+      expect(mock_service).to receive(:run) { survey_response }
       call
+      expect(subject).to redirect_to(answer_survey_path(survey_response))
     end
   end
 end

@@ -1,0 +1,15 @@
+%h1 Answer Me
+
+%p= @wizard.current.question.text
+
+= form_for(@wizard.current, url: answer_survey_question_path(@wizard.survey_response, @wizard.current.position), method: :post) do |f|
+  = f.label :answer
+  = f.text_field :answer
+
+  = f.submit
+
+- if @wizard.previous
+  = link_to("previous", answer_survey_question_path(@wizard.survey_response, @wizard.previous.position))
+
+- if @wizard.can_manually_proceed?
+  = link_to("next", next_question_path)
