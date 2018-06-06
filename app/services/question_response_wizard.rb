@@ -14,19 +14,33 @@ class QuestionResponseWizard
   end
 
   def previous
-    @previous ||= begin
-      @survey_response.question_responses.where("id < ?", current).last
-    end
+    @previous ||= previous_questions.last
   end
 
   def next
-    @next ||= begin
-      @survey_response.question_responses.where("id > ?", current).first
-    end
+    @next ||= remaining_questions.first
   end
 
-  def can_show_next?
+  def can_manually_proceed?
     current.answered? && self.next.present?
   end
 
+  def only_unanswered_questions_remaining?
+    remaining_questions.answered.none?
+  end
+
+  def survey_completed?
+    @survey_response.question_responses.unanswered.count.zero?
+  end
+
+
+  private
+
+  def previous_questions
+    @survey_response.question_responses.where("id < ?", current)
+  end
+
+  def remaining_questions
+    @survey_response.question_responses.where("id > ?", current)
+  end
 end

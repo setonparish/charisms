@@ -39,11 +39,58 @@ describe QuestionResponseWizard do
       end
     end
 
-    describe "#can_show_next?" do
+    describe "#can_manually_proceed?" do
       context "if current question is answered and there is a next question" do
         it "returns true" do
           service.current.answer = "cantical of the sun"
-          expect(service.can_show_next?).to eq(true)
+          expect(service.can_manually_proceed?).to eq(true)
+        end
+      end
+    end
+
+    describe "#only_unanswered_questions_remaining" do
+      context "with all remaining questions answered" do
+        before do
+          survey_response.question_responses.update_all(answer: nil)
+          survey_response.question_responses.first.update_column(:answer, "simon peter")
+        end
+
+        it "returns true" do
+          expect(service.only_unanswered_questions_remaining?).to eq(true)
+        end
+      end
+
+      context "with some remaining questions unanswered" do
+        before do
+          survey_response.question_responses.update_all(answer: nil)
+          survey_response.question_responses.last.update_column(:answer, "simon peter")
+        end
+
+        it "returns false" do
+          expect(service.only_unanswered_questions_remaining?).to eq(false)
+        end
+      end
+    end
+
+    describe "#survey_completed?" do
+      context "with all questions answered" do
+        before do
+          survey_response.question_responses.update_all(answer: "simon peter")
+        end
+
+        it "returns true" do
+          expect(service.survey_completed?).to eq(true)
+        end
+      end
+
+      context "with one question unanswered" do
+        before do
+          survey_response.question_responses.update_all(answer: "simon peter")
+          survey_response.question_responses.last.update_column(:answer, nil)
+        end
+
+        it "returns false" do
+          expect(service.survey_completed?).to eq(false)
         end
       end
     end
@@ -73,11 +120,58 @@ describe QuestionResponseWizard do
       end
     end
 
-    describe "#can_show_next?" do
+    describe "#can_manually_proceed?" do
       context "if current question is answered and there is a next question" do
         it "returns true" do
           service.current.answer = "cantical of the sun"
-          expect(service.can_show_next?).to eq(true)
+          expect(service.can_manually_proceed?).to eq(true)
+        end
+      end
+    end
+
+    describe "#only_unanswered_questions_remaining" do
+      context "with all remaining questions answered" do
+        before do
+          survey_response.question_responses.update_all(answer: nil)
+          survey_response.question_responses.first.update_column(:answer, "simon peter")
+        end
+
+        it "returns true" do
+          expect(service.only_unanswered_questions_remaining?).to eq(true)
+        end
+      end
+
+      context "with some remaining questions unanswered" do
+        before do
+          survey_response.question_responses.update_all(answer: nil)
+          survey_response.question_responses.last.update_column(:answer, "simon peter")
+        end
+
+        it "returns false" do
+          expect(service.only_unanswered_questions_remaining?).to eq(false)
+        end
+      end
+    end
+
+    describe "#survey_completed?" do
+      context "with all questions answered" do
+        before do
+          survey_response.question_responses.update_all(answer: "simon peter")
+        end
+
+        it "returns true" do
+          expect(service.survey_completed?).to eq(true)
+        end
+      end
+
+      context "with one question unanswered" do
+        before do
+          survey_response.question_responses.update_all(answer: "simon peter")
+          survey_response.question_responses.last.update_column(:answer, nil)
+        end
+
+        it "returns false" do
+          expect(service.survey_completed?).to eq(false)
         end
       end
     end
