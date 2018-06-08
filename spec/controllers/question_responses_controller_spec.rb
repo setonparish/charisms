@@ -15,7 +15,7 @@ describe QuestionResponsesController do
   end
 
   describe "#update" do
-    let(:call) { post :update, params: { question_response: { answer: "canticle of the sun" }, survey_response_id: survey_response.id, question_response_position: question_response.position } }
+    let(:call) { post :update, params: { question_response: { answer: "3" }, survey_response_id: survey_response.id, question_response_position: question_response.position } }
 
     context "answered a previously answered question on the survey" do
       let!(:next_question_response) do
@@ -27,8 +27,8 @@ describe QuestionResponsesController do
       end
 
       before do
-        question_response.update(answer: "saint francis")
-        last_question_response.update(answer: "saint francis")
+        question_response.update(answer: "2")
+        last_question_response.update(answer: "2")
       end
 
       it "renders" do

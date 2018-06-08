@@ -18,7 +18,7 @@ describe QuestionResponseWizard do
 
       context "with one unanswered question" do
         before do
-          question_responses.first.update(answer: "canticle of the sun")
+          question_responses.first.update(answer: "2")
         end
 
         it "returns second question_response" do
@@ -52,7 +52,7 @@ describe QuestionResponseWizard do
       context "with all remaining questions answered" do
         before do
           survey_response.question_responses.update_all(answer: nil)
-          survey_response.question_responses.first.update_column(:answer, "simon peter")
+          survey_response.question_responses.first.update_column(:answer, "2")
         end
 
         it "returns true" do
@@ -63,7 +63,7 @@ describe QuestionResponseWizard do
       context "with some remaining questions unanswered" do
         before do
           survey_response.question_responses.update_all(answer: nil)
-          survey_response.question_responses.last.update_column(:answer, "simon peter")
+          survey_response.question_responses.last.update_column(:answer, "2")
         end
 
         it "returns false" do
@@ -133,7 +133,7 @@ describe QuestionResponseWizard do
       context "with all remaining questions answered" do
         before do
           survey_response.question_responses.update_all(answer: nil)
-          survey_response.question_responses.first.update_column(:answer, "simon peter")
+          survey_response.question_responses.first.update_column(:answer, "2")
         end
 
         it "returns true" do
@@ -144,7 +144,7 @@ describe QuestionResponseWizard do
       context "with some remaining questions unanswered" do
         before do
           survey_response.question_responses.update_all(answer: nil)
-          survey_response.question_responses.last.update_column(:answer, "simon peter")
+          survey_response.question_responses.last.update_column(:answer, "2")
         end
 
         it "returns false" do
@@ -156,7 +156,7 @@ describe QuestionResponseWizard do
     describe "#survey_completed?" do
       context "with all questions answered" do
         before do
-          survey_response.question_responses.update_all(answer: "simon peter")
+          survey_response.question_responses.update_all(answer: "2")
         end
 
         it "returns true" do
@@ -166,7 +166,7 @@ describe QuestionResponseWizard do
 
       context "with one question unanswered" do
         before do
-          survey_response.question_responses.update_all(answer: "simon peter")
+          survey_response.question_responses.update_all(answer: "2")
           survey_response.question_responses.last.update_column(:answer, nil)
         end
 

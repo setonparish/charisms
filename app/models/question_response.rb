@@ -4,6 +4,7 @@ class QuestionResponse < ApplicationRecord
 
   validates :question, :position, uniqueness: { scope: [:survey_response] }
   validates :answer, presence: true, on: :update
+  validates :answer, numericality: { only_integer: true }, inclusion: { in: LikertScale::SCORES.map(&:to_s) }, allow_blank: true
 
   def self.unanswered
     where(answer: nil)

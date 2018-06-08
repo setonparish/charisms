@@ -10,7 +10,7 @@ describe QuestionResponse do
   end
 
   describe ".unanswered" do
-    let!(:answered_question_response) { FactoryBot.create(:question_response, answer: "so much to be consoled") }
+    let!(:answered_question_response) { FactoryBot.create(:question_response, answer: "2") }
     let!(:unanswered_question_response) { FactoryBot.create(:question_response, answer: nil) }
 
     it "returns answered question_responses" do
@@ -19,7 +19,7 @@ describe QuestionResponse do
   end
 
   describe ".answered" do
-    let!(:answered_question_response) { FactoryBot.create(:question_response, answer: "so much to be consoled") }
+    let!(:answered_question_response) { FactoryBot.create(:question_response, answer: "2") }
     let!(:unanswered_question_response) { FactoryBot.create(:question_response, answer: nil) }
 
     it "returns answered question_responses" do
@@ -28,7 +28,7 @@ describe QuestionResponse do
   end
 
   describe "#answered?" do
-    let(:question_response) { FactoryBot.build(:question_response, answer: "so much to be consoled") }
+    let(:question_response) { FactoryBot.build(:question_response, answer: "2") }
 
     it "is a valid factory" do
       expect(question_response).to be_answered

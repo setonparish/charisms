@@ -3,6 +3,6 @@ FactoryBot.define do
     survey_response
     question
     sequence(:position)
-    answer "My Answer"
+    answer "3"
   end
 end
