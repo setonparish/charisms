@@ -10,10 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_26_133500) do
+ActiveRecord::Schema.define(version: 2018_06_08_171154) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "charisms", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "question_orders", force: :cascade do |t|
     t.bigint "survey_id"
@@ -40,6 +46,8 @@ ActiveRecord::Schema.define(version: 2018_05_26_133500) do
     t.string "text"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "charism_id"
+    t.index ["charism_id"], name: "index_questions_on_charism_id"
   end
 
   create_table "respondents", force: :cascade do |t|
