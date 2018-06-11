@@ -1,9 +1,26 @@
 class LikertScale
-  STRONGLY_DISAGREE = 0
-  SOMEWHAT_DISAGREE = 1
-  UNDECIDED = 2
-  SOMEWHAT_AGREE = 3
-  STRONGLY_AGREE = 4
+  OPTIONS = [
+    { name: "Strongly Disagree", score: 0 },
+    { name: "Somewhat Disagree", score: 1 },
+    { name: "Undecided", score: 2 },
+    { name: "Somewhat Agree", score: 3 },
+    { name: "Strongly Agree", score: 4 },
+  ]
 
-  SCORES = [STRONGLY_DISAGREE, SOMEWHAT_DISAGREE, UNDECIDED, SOMEWHAT_AGREE, STRONGLY_AGREE]
+  def self.all
+    @@all ||= OPTIONS.map do |attrs|
+      new(attrs)
+    end
+  end
+
+  def self.scores
+    all.map(&:score)
+  end
+
+  attr_accessor :name, :score
+
+  def initialize(name:, score:)
+    @name = name
+    @score = score
+  end
 end
