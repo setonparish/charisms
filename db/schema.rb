@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_08_201802) do
+ActiveRecord::Schema.define(version: 2018_06_12_023015) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "charism_scores", force: :cascade do |t|
+    t.bigint "survey_response_id"
+    t.bigint "charism_id"
+    t.integer "score"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["charism_id"], name: "index_charism_scores_on_charism_id"
+    t.index ["survey_response_id"], name: "index_charism_scores_on_survey_response_id"
+  end
 
   create_table "charisms", force: :cascade do |t|
     t.string "name"
@@ -76,6 +86,8 @@ ActiveRecord::Schema.define(version: 2018_06_08_201802) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "charism_scores", "charisms"
+  add_foreign_key "charism_scores", "survey_responses"
   add_foreign_key "question_orders", "questions"
   add_foreign_key "question_orders", "surveys"
   add_foreign_key "question_responses", "questions"
