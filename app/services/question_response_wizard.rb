@@ -9,7 +9,9 @@ class QuestionResponseWizard
 
   def current
     @current ||= begin
-      @question_response || @survey_response.question_responses.unanswered.first
+      @question_response ||
+        @survey_response.question_responses.unanswered.first ||
+        @survey_response.question_responses.last
     end
   end
 

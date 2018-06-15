@@ -25,6 +25,16 @@ describe QuestionResponseWizard do
           expect(service.current).to eq(question_responses.second)
         end
       end
+
+      context "with all answered questions" do
+        before do
+          question_responses.each { |qr| qr.update(answer: "2") }
+        end
+
+        it "returns the last question_response" do
+          expect(service.current).to eq(question_responses.last)
+        end
+      end
     end
 
     describe "#next" do
