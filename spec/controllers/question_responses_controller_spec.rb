@@ -49,10 +49,16 @@ describe QuestionResponsesController do
     end
 
     context "no unanswered questions are left to answer on survey" do
-      # TODO: temporary until scoring page is complete
-      it "redirects to the root path" do
+      it "calculates the survey score" do
+        wizard = double()
+        expect(CharismScoreCreator).to receive(:new).with(survey_response: survey_response).and_return(wizard)
+        expect(wizard).to receive(:run)
         call
-        expect(response).to redirect_to root_path
+      end
+
+      it "redirects to the survey score results page" do
+        call
+        expect(response).to redirect_to survey_result_path(survey_response_id: survey_response.friendly_id)
       end
     end
   end

@@ -16,6 +16,9 @@ Rails.application.routes.draw do
     # answer a specific survey question - /responses/survey/vl5if6sphzex/questions/2
     get "survey/:survey_response_id/questions/:question_response_position", to: "question_responses#edit", as: :answer_survey_question
     post "survey/:survey_response_id/questions/:question_response_position", to: "question_responses#update"
+
+    # show final score
+    get "survey/:survey_response_id/result", to: "charism_scores#show", as: :survey_result
   end
 
   root "welcome#index"

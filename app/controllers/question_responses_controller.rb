@@ -7,6 +7,10 @@ class QuestionResponsesController < ApplicationController
 
   def update
     if @wizard.current.update(question_response_params)
+      if @wizard.survey_completed?
+        # calculate scores for each charism
+        CharismScoreCreator.new(survey_response: @wizard.survey_response).run
+      end
       redirect_to next_question_path, turbolinks: true
     else
       flash.now[:alert] = "There was an error saving your answer."
@@ -31,11 +35,15 @@ class QuestionResponsesController < ApplicationController
 
   def next_question_path
     if !@wizard.next && @wizard.survey_completed?
-      # TODO: redirect to survey score page
-      root_path
+      # charism score summary page
+      survey_result_path(@wizard.survey_response)
+
     elsif @wizard.only_unanswered_questions_remaining?
+      # survey path without specific question as part of path
       answer_survey_path(@wizard.survey_response)
+
     else
+      # survey path with specific question as part of path
       answer_survey_question_path(@wizard.survey_response, @wizard.next.position)
     end
   end
