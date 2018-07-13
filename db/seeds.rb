@@ -30,7 +30,7 @@ require "csv"
   end
 end
 
-Survey.where(name: "Spiritual Gifts").first_or_initialize do |survey|
+default_survey = Survey.where(name: "Spiritual Gifts").first_or_initialize do |survey|
   puts "Creating survey '#{survey.name}' with default questions."
 
   CSV.foreach(Rails.root.join("docs/data/questions.csv"), headers: true) do |row|
@@ -38,6 +38,9 @@ Survey.where(name: "Spiritual Gifts").first_or_initialize do |survey|
   end
   survey.save!
 end
+
+# create a default DistributionGroup
+DistributionGroup.where(name: "Disconnected Responses", survey: default_survey).first_or_create!
 
 if Rails.env.development?
   NUM_CHARISMS_TO_KEEP = 3

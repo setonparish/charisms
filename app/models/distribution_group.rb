@@ -3,6 +3,7 @@ class DistributionGroup < ApplicationRecord
   include Slugger
 
   belongs_to :survey
+  has_many :survey_responses
 
   validates :name, presence: true
 
