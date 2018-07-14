@@ -40,7 +40,7 @@ default_survey = Survey.where(name: "Spiritual Gifts").first_or_initialize do |s
 end
 
 # create a default DistributionGroup
-DistributionGroup.where(name: "Disconnected Responses", survey: default_survey).first_or_create!
+DistributionGroup.where(name: DistributionGroup::DEFAULT_GROUP_NAME, survey: default_survey).first_or_create!
 
 if Rails.env.development?
   NUM_CHARISMS_TO_KEEP = 3

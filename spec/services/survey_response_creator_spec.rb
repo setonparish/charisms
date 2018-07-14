@@ -2,12 +2,13 @@ require "rails_helper"
 
 describe SurveyResponseCreator do
 
-  let(:survey) { FactoryBot.create(:survey) }
+  let(:distribution_group) { FactoryBot.create(:distribution_group) }
+  let(:survey) { distribution_group.survey }
   let!(:question_orders) { FactoryBot.create_list(:question_order, 2, survey: survey) }
 
   let(:respondent) { FactoryBot.create(:respondent) }
   let(:service) do
-    SurveyResponseCreator.new(respondent: respondent, survey: survey)
+    SurveyResponseCreator.new(respondent: respondent, survey: survey, distribution_group: distribution_group)
   end
 
   describe "#run" do

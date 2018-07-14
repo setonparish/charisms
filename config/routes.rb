@@ -7,8 +7,7 @@ Rails.application.routes.draw do
   #
   scope :responses do
     # start a survey - /responses/survey/begin
-    get "survey/begin", to: "survey_responses#new", as: :begin_survey
-    post "survey/begin", to: "survey_responses#create"
+    get "survey/begin/(:distribution_group_slug)", to: "survey_welcome#new", as: :begin_survey
 
     # answer the most recent survey question - /responses/survey/vl5if6sphzex
     get "survey/:survey_response_id", to: "question_responses#edit", as: :answer_survey
@@ -17,7 +16,7 @@ Rails.application.routes.draw do
     get "survey/:survey_response_id/questions/:question_response_position", to: "question_responses#edit", as: :answer_survey_question
     post "survey/:survey_response_id/questions/:question_response_position", to: "question_responses#update"
 
-    # show final score
+    # show final score - /responses/survey/vl5if6sphzex/result
     get "survey/:survey_response_id/result", to: "charism_scores#show", as: :survey_result
   end
 
