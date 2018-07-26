@@ -1,4 +1,5 @@
 %h1 Charism Scores
 
 - @charism_scores.each do |charism_score|
-  %p== #{charism_score.charism.name} - #{charism_score.score}
+  %h4== #{charism_score.charism.name} - #{charism_score.score}
+  %p= charism_score.charism.description

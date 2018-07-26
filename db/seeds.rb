@@ -1,32 +1,8 @@
 require "csv"
-
-[
-  "Administration",
-  "Apostle",
-  "Caregiver",
-  "Craftsmanship",
-  "Discernment",
-  "Evangelist",
-  "Exhortation",
-  "Faith",
-  "Giving",
-  "Healing",
-  "Hospitality",
-  "Intercession",
-  "Knowledge",
-  "Mercy",
-  "Missionary",
-  "Musician",
-  "Pastor",
-  "Power (Deeds of)",
-  "Prophet",
-  "Serving",
-  "Teacher",
-  "Tongues",
-  "Wisdom"
-].each do |charism_name|
-  Charism.where(name: charism_name).first_or_create! do |charism|
-    puts "Creating default charism '#{charism.name}'."
+charisms = CSV.foreach(Rails.root.join("docs/data/charisms.csv"), headers: true, encoding: "windows-1251:utf-8") do |row|
+  Charism.where(name: row["Charism"]).first_or_initialize.tap do |charism|
+    charism.description = row["Description"]
+    charism.save!
   end
 end
 
@@ -34,6 +10,7 @@ default_survey = Survey.where(name: "Spiritual Gifts").first_or_initialize do |s
   puts "Creating survey '#{survey.name}' with default questions."
 
   CSV.foreach(Rails.root.join("docs/data/questions.csv"), headers: true) do |row|
+    puts row[1]
     survey.questions.build(text: row[0].chomp, charism: Charism.find_by!(name: row[1]))
   end
   survey.save!
@@ -45,7 +22,7 @@ DistributionGroup.where(name: DistributionGroup::DEFAULT_GROUP_NAME, survey: def
 if Rails.env.development?
   NUM_CHARISMS_TO_KEEP = 3
   NUM_QUESTIONS_PER_CHARISM_TO_KEEP = 2
-  puts "Decreasng the number of charisms to #{NUM_CHARISMS_TO_KEEP}, each with #{NUM_QUESTIONS_PER_CHARISM_TO_KEEP} questions"
+  puts "Decreasing the number of charisms to #{NUM_CHARISMS_TO_KEEP}, each with #{NUM_QUESTIONS_PER_CHARISM_TO_KEEP} questions"
 
   charism_questions = Survey.last.questions.group_by(&:charism)
 
