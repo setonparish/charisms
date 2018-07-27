@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+
+  get  "login"  => "sessions#new"
+  post "login"  => "sessions#create"
+
   resources :welcome, only: :index
   resources :respondents, only: [:new, :create]
 

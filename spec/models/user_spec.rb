@@ -9,15 +9,15 @@ describe Survey do
     end
   end
 
-  describe "#authenticate" do
-    let(:user) { FactoryBot.create(:user, password: "password") }
+  describe ".authenticate" do
+    let!(:user) { FactoryBot.create(:user, email: "UPPERCASE@example.com", password: "password") }
 
     it "returns user record for correct password" do
-      expect(user.authenticate("password")).to eq(user)
+      expect(User.authenticate("UPPERCASE@example.com", "password")).to eq(user)
     end
 
     it "returns false for incorrect password" do
-      expect(user.authenticate("not-correct")).to eq(false)
+      expect(User.authenticate("UPPERCASE@example.com", "not-correct-password")).to eq(false)
     end
   end
 end
