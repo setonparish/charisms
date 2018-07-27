@@ -6,6 +6,12 @@ Rails.application.routes.draw do
   resources :welcome, only: :index
   resources :respondents, only: [:new, :create]
 
+  namespace :organizer do
+    resources :distribution_groups, only: :index
+
+    root "distribution_groups#index"
+  end
+
   #
   # Expose prettier routes to the end user for answering survey questions
   #
