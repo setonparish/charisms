@@ -1,4 +1,4 @@
-class DistributionGroup < ApplicationRecord
+class WebLink < ApplicationRecord
   extend FriendlyId
   include Slugger
 

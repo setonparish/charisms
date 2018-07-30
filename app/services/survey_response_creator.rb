@@ -4,14 +4,14 @@
 # "question" on a survey.
 #
 class SurveyResponseCreator
-  def initialize(respondent:, survey:, distribution_group:)
+  def initialize(respondent:, survey:, web_link:)
     @respondent = respondent
     @survey = survey
-    @distribution_group = distribution_group
+    @web_link = web_link
   end
 
   def run
-    SurveyResponse.where(respondent: @respondent, survey: @survey, distribution_group: @distribution_group).first_or_initialize.tap do |survey_response|
+    SurveyResponse.where(respondent: @respondent, survey: @survey, web_link: @web_link).first_or_initialize.tap do |survey_response|
       @survey.question_order.includes(:question).each do |question_order|
         survey_response.question_responses
                        .where(question: question_order.question)

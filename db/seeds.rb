@@ -16,8 +16,8 @@ default_survey = Survey.where(name: "Spiritual Gifts").first_or_initialize do |s
   survey.save!
 end
 
-# create a default DistributionGroup
-DistributionGroup.where(name: DistributionGroup::DEFAULT_GROUP_NAME, survey: default_survey).first_or_create!
+# create a default WebLink
+WebLink.where(name: WebLink::DEFAULT_GROUP_NAME, survey: default_survey).first_or_create!
 
 if Rails.env.development?
   NUM_CHARISMS_TO_KEEP = 3

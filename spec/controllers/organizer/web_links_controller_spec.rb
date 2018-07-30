@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe Organizer::DistributionGroupsController do
+describe Organizer::WebLinksController do
   it_behaves_like "authenticated_organizer_page", actions: [:index]
 
   describe "#index", :authenticated_user do

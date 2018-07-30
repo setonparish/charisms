@@ -7,7 +7,7 @@ class RespondentsController < ApplicationController
     @respondent = Respondent.new(respondent_params)
 
     if @respondent.save
-      survey_response = SurveyResponseCreator.new(survey: distribution_group.survey, distribution_group: distribution_group, respondent: @respondent).run
+      survey_response = SurveyResponseCreator.new(survey: web_link.survey, web_link: web_link, respondent: @respondent).run
       redirect_to answer_survey_path(survey_response)
     else
       flash.now[:alert] = "Please fix the problems in the form below"
@@ -18,8 +18,8 @@ class RespondentsController < ApplicationController
 
   private
 
-  def distribution_group
-    DistributionGroup.find(session[:distribution_group_id])
+  def web_link
+    WebLink.find(session[:web_link_id])
   end
 
   def respondent_params

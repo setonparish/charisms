@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :survey_response do
     survey
-    distribution_group
+    web_link
     respondent
   end
 end

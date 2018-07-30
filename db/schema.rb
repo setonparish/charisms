@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_26_232706) do
+ActiveRecord::Schema.define(version: 2018_07_30_172742) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,15 +30,6 @@ ActiveRecord::Schema.define(version: 2018_07_26_232706) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "description"
-  end
-
-  create_table "distribution_groups", force: :cascade do |t|
-    t.string "name"
-    t.bigint "survey_id"
-    t.string "slug"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["survey_id"], name: "index_distribution_groups_on_survey_id"
   end
 
   create_table "question_orders", force: :cascade do |t|
@@ -85,11 +76,11 @@ ActiveRecord::Schema.define(version: 2018_07_26_232706) do
     t.bigint "respondent_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "distribution_group_id"
-    t.index ["distribution_group_id"], name: "index_survey_responses_on_distribution_group_id"
+    t.bigint "web_link_id"
     t.index ["respondent_id"], name: "index_survey_responses_on_respondent_id"
     t.index ["slug"], name: "index_survey_responses_on_slug"
     t.index ["survey_id"], name: "index_survey_responses_on_survey_id"
+    t.index ["web_link_id"], name: "index_survey_responses_on_web_link_id"
   end
 
   create_table "surveys", force: :cascade do |t|
@@ -107,14 +98,23 @@ ActiveRecord::Schema.define(version: 2018_07_26_232706) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "web_links", force: :cascade do |t|
+    t.string "name"
+    t.bigint "survey_id"
+    t.string "slug"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["survey_id"], name: "index_web_links_on_survey_id"
+  end
+
   add_foreign_key "charism_scores", "charisms"
   add_foreign_key "charism_scores", "survey_responses"
-  add_foreign_key "distribution_groups", "surveys"
   add_foreign_key "question_orders", "questions"
   add_foreign_key "question_orders", "surveys"
   add_foreign_key "question_responses", "questions"
   add_foreign_key "question_responses", "survey_responses"
-  add_foreign_key "survey_responses", "distribution_groups"
   add_foreign_key "survey_responses", "respondents"
   add_foreign_key "survey_responses", "surveys"
+  add_foreign_key "survey_responses", "web_links"
+  add_foreign_key "web_links", "surveys"
 end

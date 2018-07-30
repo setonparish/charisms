@@ -1,18 +1,18 @@
 class SurveyWelcomeController < ApplicationController
   def new
-    session[:distribution_group_id] = distribution_group.id
+    session[:web_link_id] = web_link.id
   end
 
   private
 
-  def distribution_group
-    if slug = params[:distribution_group_slug]
+  def web_link
+    if slug = params[:web_link_slug]
       # a custom link was provided
-      DistributionGroup.friendly.find(slug)
+      WebLink.friendly.find(slug)
     else
-      # TODO: scope this `DistributionGroup` to the admin user
+      # TODO: scope this `WebLink` to the admin user
       # no custom link was used, so associate to a default group
-      DistributionGroup.find_by!(name: DistributionGroup::DEFAULT_GROUP_NAME)
+      WebLink.find_by!(name: WebLink::DEFAULT_GROUP_NAME)
     end
   end
 end

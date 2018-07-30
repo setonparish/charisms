@@ -10,10 +10,10 @@ describe RespondentsController do
 
   describe "#create" do
     let(:survey) { FactoryBot.create(:survey) }
-    let(:distribution_group) { FactoryBot.create(:distribution_group, survey: survey) }
+    let(:web_link) { FactoryBot.create(:web_link, survey: survey) }
 
     before do
-      session[:distribution_group_id] = distribution_group.id
+      session[:web_link_id] = web_link.id
     end
 
     context "with valid parameters" do
@@ -32,7 +32,7 @@ describe RespondentsController do
       end
 
       it "calls service and redirects to survey_responses#edit" do
-        expect(SurveyResponseCreator).to receive(:new).with(survey: survey, respondent: instance_of(Respondent), distribution_group: distribution_group) { mock_service }
+        expect(SurveyResponseCreator).to receive(:new).with(survey: survey, respondent: instance_of(Respondent), web_link: web_link) { mock_service }
         expect(mock_service).to receive(:run) { survey_response }
         post(:create, params: params)
         expect(subject).to redirect_to(answer_survey_path(survey_response))

@@ -1,18 +1,18 @@
 require "rails_helper"
 
 describe SurveyWelcomeController do
-  context "with a custom link containing a distribution group slug" do
-    let(:distribution_group) { FactoryBot.create(:distribution_group) }
+  context "with a custom link containing a web link slug" do
+    let(:web_link) { FactoryBot.create(:web_link) }
 
     describe "#new" do
-      let(:call) { get :new, params: { distribution_group_slug: distribution_group.slug } }
+      let(:call) { get :new, params: { web_link_slug: web_link.slug } }
 
-      it "sets the distribution_group slug" do
+      it "sets the web_link slug" do
         expect {
           call
         }.to change {
-          session[:distribution_group_id]
-        }.from(nil).to(distribution_group.id)
+          session[:web_link_id]
+        }.from(nil).to(web_link.id)
       end
 
       it "renders" do
@@ -22,18 +22,18 @@ describe SurveyWelcomeController do
     end
   end
 
-  context "with no custom link containing a distribution group slug" do
-    let!(:distribution_group) { FactoryBot.create(:distribution_group, :default) }
+  context "with no custom link containing a web link slug" do
+    let!(:web_link) { FactoryBot.create(:web_link, :default) }
 
     describe "#new" do
       let(:call) { get :new }
 
-      it "sets the default distribution_group slug" do
+      it "sets the default web_link slug" do
         expect {
           call
         }.to change {
-          session[:distribution_group_id]
-        }.from(nil).to(distribution_group.id)
+          session[:web_link_id]
+        }.from(nil).to(web_link.id)
       end
 
       it "renders" do

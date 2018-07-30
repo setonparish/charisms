@@ -7,9 +7,9 @@ Rails.application.routes.draw do
   resources :respondents, only: [:new, :create]
 
   namespace :organizer do
-    resources :distribution_groups, only: :index
+    resources :web_links, only: :index
 
-    root "distribution_groups#index"
+    root "web_links#index"
   end
 
   #
@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   #
   scope :responses do
     # start a survey - /responses/survey/begin
-    get "survey/begin/(:distribution_group_slug)", to: "survey_welcome#new", as: :begin_survey
+    get "survey/begin/(:web_link_slug)", to: "survey_welcome#new", as: :begin_survey
 
     # answer the most recent survey question - /responses/survey/vl5if6sphzex
     get "survey/:survey_response_id", to: "question_responses#edit", as: :answer_survey
