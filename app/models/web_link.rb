@@ -3,6 +3,7 @@ class WebLink < ApplicationRecord
   include Slugger
 
   belongs_to :survey
+  belongs_to :user
   has_many :survey_responses
 
   DEFAULT_GROUP_NAME = "Disconnected Responses"

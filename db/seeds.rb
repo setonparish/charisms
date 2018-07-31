@@ -1,3 +1,5 @@
+
+# ----- charisms
 require "csv"
 charisms = CSV.foreach(Rails.root.join("docs/data/charisms.csv"), headers: true, encoding: "windows-1251:utf-8") do |row|
   Charism.where(name: row["Charism"]).first_or_initialize.tap do |charism|
@@ -6,6 +8,7 @@ charisms = CSV.foreach(Rails.root.join("docs/data/charisms.csv"), headers: true,
   end
 end
 
+# ----- default survey
 default_survey = Survey.where(name: "Spiritual Gifts").first_or_initialize do |survey|
   puts "Creating survey '#{survey.name}' with default questions."
 
@@ -16,9 +19,22 @@ default_survey = Survey.where(name: "Spiritual Gifts").first_or_initialize do |s
   survey.save!
 end
 
-# create a default WebLink
-WebLink.where(name: WebLink::DEFAULT_GROUP_NAME, survey: default_survey).first_or_create!
+# ----- user
+user = User.first_or_initialize(email: "padre@example.com").tap do |user|
+  user.first_name = "Padre"
+  user.last_name = "Pio"
+  user.email = "padre@example.com"
+  user.password = "password"
+  user.save!
+end
 
+# ----- web link
+WebLink.where(name: WebLink::DEFAULT_GROUP_NAME, survey: default_survey).first_or_initialize.tap do |web_link|
+  web_link.user = user
+  web_link.save!
+end
+
+# ----- decrease amount of questions in development
 if Rails.env.development?
   NUM_CHARISMS_TO_KEEP = 3
   NUM_QUESTIONS_PER_CHARISM_TO_KEEP = 2
