@@ -15,9 +15,17 @@ describe SessionsController do
     context "with correct credentials" do
       let(:password) { "password" }
 
+      it "sets the user session value" do
+        expect {
+          call
+        }.to change {
+          session[:user_id]
+        }.from(nil).to(user.id)
+      end
+
       it "redirects to root page" do
         call
-        expect(response).to redirect_to(root_path)
+        expect(response).to redirect_to(organizer_dashboard_path)
       end
     end
 

@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   namespace :organizer do
     resources :web_links, only: :index
 
-    root "web_links#index"
+    root "web_links#index", as: :dashboard
   end
 
   #
