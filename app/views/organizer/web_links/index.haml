@@ -2,4 +2,6 @@
 
 %ul
   - @web_links.each do |web_link|
-    %li= web_link.name
+    %li
+      = web_link.name
+      == (#{begin_survey_url(web_link.slug)})
