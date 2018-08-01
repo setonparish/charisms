@@ -8,7 +8,7 @@ class WebLink < ApplicationRecord
 
   DEFAULT_GROUP_NAME = "Disconnected Responses"
 
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: { scope: :user }
 
   friendly_id :easy_slug, use: :slugged
 end
