@@ -3,5 +3,7 @@
 %ul
   - @web_links.each do |web_link|
     %li
-      = web_link.name
+      = link_to(web_link.name, edit_organizer_web_link_path(web_link))
       == (#{begin_survey_url(web_link.slug)})
+
+= link_to("Create Web Link", :new_organizer_web_link)

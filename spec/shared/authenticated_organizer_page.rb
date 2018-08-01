@@ -6,12 +6,15 @@ RSpec.shared_examples "authenticated_organizer_page" do |params|
   Array(params[:actions]).each do |action|
     http_verbs = {
        index: :get,
+       new: :get,
+       create: :post,
+       edit: :get,
        update: :post,
        show: :get,
      }
 
     it "redirects to login page" do
-      self.send(http_verbs.fetch(action), action)
+      self.send(http_verbs.fetch(action), action, params: { id: 1 })
       expect(response).to redirect_to(:login)
     end
   end
