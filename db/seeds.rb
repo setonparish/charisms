@@ -9,7 +9,7 @@ charisms = CSV.foreach(Rails.root.join("docs/data/charisms.csv"), headers: true,
 end
 
 # ----- default survey
-default_survey = Survey.where(name: "Spiritual Gifts").first_or_initialize do |survey|
+default_survey = Survey.where(name: Survey::DEFAULT_NAME).first_or_initialize do |survey|
   puts "Creating survey '#{survey.name}' with default questions."
 
   CSV.foreach(Rails.root.join("docs/data/questions.csv"), headers: true) do |row|
