@@ -11,4 +11,8 @@ class WebLink < ApplicationRecord
   validates :name, presence: true, uniqueness: { scope: :user }
 
   friendly_id :easy_slug, use: :slugged
+
+  def self.default
+    find_by(name: DEFAULT_GROUP_NAME, survey: Survey.default)
+  end
 end

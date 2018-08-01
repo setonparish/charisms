@@ -12,7 +12,7 @@ class SurveyWelcomeController < ApplicationController
     else
       # TODO: scope this `WebLink` to the admin user
       # no custom link was used, so associate to a default group
-      WebLink.find_by!(name: WebLink::DEFAULT_GROUP_NAME)
+      WebLink.default
     end
   end
 end

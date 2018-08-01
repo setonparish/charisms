@@ -23,8 +23,6 @@ describe SurveyWelcomeController do
   end
 
   context "with no custom link containing a web link slug" do
-    let!(:web_link) { FactoryBot.create(:web_link, :default) }
-
     describe "#new" do
       let(:call) { get :new }
 
@@ -33,7 +31,7 @@ describe SurveyWelcomeController do
           call
         }.to change {
           session[:web_link_id]
-        }.from(nil).to(web_link.id)
+        }.from(nil).to(WebLink.default.id)
       end
 
       it "renders" do
