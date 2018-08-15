@@ -20,7 +20,7 @@ default_survey = Survey.where(name: Survey::DEFAULT_NAME).first_or_initialize do
 end
 
 # ----- user
-user = User.first_or_initialize(email: "admin@example.com").tap do |user|
+user = User.where(email: "admin@example.com").first_or_initialize.tap do |user|
   user.first_name = "Admin"
   user.last_name = "Admin"
   user.password = "password"
