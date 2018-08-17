@@ -3,7 +3,9 @@
 %ul
   - @web_links.each do |web_link|
     %li
-      = link_to(web_link.name, edit_organizer_web_link_path(web_link))
+      %strong= web_link.name
+      == (#{pluralize(web_link.survey_responses.completed.count, "response")})
       == (#{begin_survey_url(web_link.slug)})
+      = link_to("edit", edit_organizer_web_link_path(web_link))
 
 = link_to("Create Web Link", :new_organizer_web_link)

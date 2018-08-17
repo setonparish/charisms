@@ -1,7 +1,7 @@
 module Organizer
   class WebLinksController < OrganizerController
     def index
-      @web_links = current_user.web_links
+      @web_links = current_user.web_links.order(created_at: :desc)
     end
 
     def new
