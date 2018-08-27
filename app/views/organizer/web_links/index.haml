@@ -3,8 +3,8 @@
 %ul
   - @web_links.each do |web_link|
     %li
-      %strong= web_link.name
-      == (#{pluralize(web_link.survey_responses.completed.count, "response")})
+      = web_link.name
+      == (#{web_link.survey_responses.completed.size} responses)
       == (#{begin_survey_url(web_link.slug)})
       = link_to("edit", edit_organizer_web_link_path(web_link))
 
