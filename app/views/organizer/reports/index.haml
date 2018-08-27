@@ -1,0 +1,11 @@
+%h1 Analysis
+
+- @summaries.each do |summary|
+  %h3
+    = summary.name
+    = summary.total
+
+  - summary.charism_scores.each do |charism_score|
+    %p
+      = charism_score.respondent.name
+      = charism_score.score
