@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_13_231144) do
+ActiveRecord::Schema.define(version: 2018_09_27_225953) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -119,9 +119,9 @@ ActiveRecord::Schema.define(version: 2018_09_13_231144) do
     t.string "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id"
+    t.bigint "organization_id"
+    t.index ["organization_id"], name: "index_web_links_on_organization_id"
     t.index ["survey_id"], name: "index_web_links_on_survey_id"
-    t.index ["user_id"], name: "index_web_links_on_user_id"
   end
 
   add_foreign_key "charism_scores", "charisms"

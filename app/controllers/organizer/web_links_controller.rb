@@ -1,7 +1,7 @@
 module Organizer
   class WebLinksController < OrganizerController
     def index
-      @web_links = current_user.web_links.order(created_at: :desc)
+      @web_links = current_organization.web_links.order(created_at: :desc)
     end
 
     def new
@@ -9,7 +9,7 @@ module Organizer
     end
 
     def create
-      @web_link = WebLink.new(web_link_params.merge(user: current_user, survey: Survey.default))
+      @web_link = WebLink.new(web_link_params.merge(organization: current_organization, survey: Survey.default))
 
       if @web_link.save
         redirect_to organizer_web_links_path
@@ -20,11 +20,11 @@ module Organizer
     end
 
     def edit
-      @web_link = current_user.web_links.friendly.find(params[:id])
+      @web_link = current_organization.web_links.friendly.find(params[:id])
     end
 
     def update
-      @web_link = current_user.web_links.friendly.find(params[:id])
+      @web_link = current_organization.web_links.friendly.find(params[:id])
 
       if @web_link.update(web_link_params)
         flash[:success] = "Updated link #{@web_link.name}"

@@ -1,7 +1,6 @@
 class User < ApplicationRecord
   has_secure_password
 
-  has_many :web_links
   has_many :organization_memberships, dependent: :destroy
   has_many :organizations, through: :organization_memberships
 

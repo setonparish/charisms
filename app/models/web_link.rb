@@ -3,12 +3,12 @@ class WebLink < ApplicationRecord
   include Slugger
 
   belongs_to :survey
-  belongs_to :user
+  belongs_to :organization
   has_many :survey_responses
 
   DEFAULT_GROUP_NAME = "Disconnected Responses"
 
-  validates :name, presence: true, uniqueness: { scope: :user }
+  validates :name, presence: true, uniqueness: { scope: :organization }
 
   friendly_id :easy_slug, use: :slugged
 

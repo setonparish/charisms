@@ -27,8 +27,11 @@ user = User.where(email: "admin@example.com").first_or_initialize.tap do |user|
   user.save!
 end
 
+# ----- organization
+organization = user.organizations.first_or_create(name: "St. Example Parish")
+
 # ----- web link
 WebLink.where(name: WebLink::DEFAULT_GROUP_NAME, survey: default_survey).first_or_initialize.tap do |web_link|
-  web_link.user = user
+  web_link.organization = organization
   web_link.save!
 end
