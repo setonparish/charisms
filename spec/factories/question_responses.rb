@@ -3,10 +3,10 @@ FactoryBot.define do
     survey_response
     question
     sequence(:position)
-    answer "3"
+    answer { "3" }
 
     transient do
-      charism nil
+      charism { nil }
     end
 
     after :create do |model, options|
