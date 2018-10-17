@@ -9,7 +9,6 @@ if Rails.env.development?
   # only keep a few questions from each charism
   charism_questions.take(NUM_CHARISMS_TO_KEEP).each do |charism, questions|
     questions.drop(NUM_QUESTIONS_PER_CHARISM_TO_KEEP).each do |q|
-      q.question_order.destroy
       q.destroy
     end
   end
@@ -17,7 +16,6 @@ if Rails.env.development?
   # delete all the other questions
   charism_questions.drop(NUM_CHARISMS_TO_KEEP).each do |charism, questions|
     questions.each do |q|
-      q.question_order.destroy
       q.destroy
     end
   end
