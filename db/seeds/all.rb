@@ -1,7 +1,6 @@
 require "csv"
 
 # ----- charisms
-require "csv"
 charisms = CSV.foreach(Rails.root.join("docs/data/charisms.csv"), headers: true, encoding: "windows-1251:utf-8") do |row|
   Charism.where(name: row["Charism"]).first_or_initialize.tap do |charism|
     charism.description = row["Description"]
