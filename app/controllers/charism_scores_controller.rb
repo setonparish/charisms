@@ -1,7 +1,7 @@
 class CharismScoresController < ApplicationController
-
   def show
-    @charism_scores = survey_response.charism_scores.order(score: :desc)
+    @survey_organization = survey_response.web_link.organization
+    @charism_scores = survey_response.charism_scores.includes(:charism).order(score: :desc)
   end
 
 
