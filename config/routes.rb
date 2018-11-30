@@ -7,8 +7,9 @@ Rails.application.routes.draw do
   resources :respondents, only: [:new, :create]
 
   namespace :organizer do
-    resources :web_links, except: [:show, :destroy]
+    resources :opportunities
     resources :reports, only: [:index]
+    resources :web_links, except: [:show, :destroy]
 
     root "web_links#index", as: :dashboard
   end

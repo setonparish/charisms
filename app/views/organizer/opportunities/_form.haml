@@ -1,0 +1,15 @@
+= form_for([:organizer, @opportunity]) do |f|
+  %div
+    = f.label(:name)
+    = f.text_field(:name)
+
+  %div
+    = f.label(:description)
+    = f.text_area(:description)
+
+  %div
+    - @charisms.all.each do |charism|
+      = check_box_tag(:charim_ids, charism.id, @opportunity.charisms.include?(charism), name: "opportunity[charism_ids][]", id: dom_id(charism))
+      = label_tag(dom_id(charism), charism.name)
+
+  = f.submit

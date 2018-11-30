@@ -1,0 +1,12 @@
+%h1 Opportunities
+
+- @opportunities.each do |opportunity|
+  %div
+    %h3
+      = opportunity.name
+      = link_to("edit", edit_organizer_opportunity_path(opportunity))
+    %p= opportunity.description
+    %p= opportunity.charisms.map(&:name).sort.join(", ")
+  %hr
+
+= link_to("Create Opportunity", new_organizer_opportunity_path)
