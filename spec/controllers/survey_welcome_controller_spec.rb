@@ -24,6 +24,7 @@ describe SurveyWelcomeController do
 
   context "with no custom link containing a web link slug" do
     describe "#new" do
+      let!(:default_catch_all_web_link) { FactoryBot.create(:web_link, :default) }
       let(:call) { get :new }
 
       it "sets the default web_link slug" do
