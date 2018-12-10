@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   namespace :organizer do
     resources :opportunities
+    resource :profile, except: [:show]
     resources :reports, only: [:index]
     resources :web_links, except: [:show, :destroy]
 
