@@ -1,16 +1,27 @@
-%h1 Answer Me
+%section(class="section")
+  .container.centered
+    %h1.title= @wizard.current.question.text
 
-%p= @wizard.current.question.text
+    = form_for(@wizard.current, url: answer_survey_question_path(@wizard.survey_response, @wizard.current.position), method: :post) do |f|
+      .likert-scale
+        .columns
+          = f.collection_radio_buttons(:answer, LikertScale.all, :score, :name) do |builder|
+            .column
+              = builder.label(class: "radio") do
+                .radio-button= builder.radio_button
+                = builder.text
 
-= form_for(@wizard.current, url: answer_survey_question_path(@wizard.survey_response, @wizard.current.position), method: :post) do |f|
-  = f.label :answer
+        = f.submit("Continue", class: "button is-large is-primary")
 
-  = f.collection_radio_buttons(:answer, LikertScale.all, :score, :name)
+    %hr
 
-  = f.submit
+    .level.is-mobile
+      .level-left
+        - if @wizard.previous
+          = link_to(answer_survey_question_path(@wizard.survey_response, @wizard.previous.position)) do
+            = fa_icon("arrow-left", text: "Previous")
 
-- if @wizard.previous
-  = link_to("previous", answer_survey_question_path(@wizard.survey_response, @wizard.previous.position))
-
-- if @wizard.can_manually_proceed?
-  = link_to("next", next_question_path)
+      .level-right
+        - if @wizard.can_manually_proceed?
+          = link_to(next_question_path) do
+            = fa_icon("arrow-right", text: "Next", right: true)
