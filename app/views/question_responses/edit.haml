@@ -1,15 +1,14 @@
-%section(class="section")
+%section{class: "section"}
   .container.centered
     %h1.title= @wizard.current.question.text
 
-    = form_for(@wizard.current, url: answer_survey_question_path(@wizard.survey_response, @wizard.current.position), method: :post) do |f|
+    = form_for(@wizard.current, url: answer_survey_question_path(@wizard.survey_response, @wizard.current.position), method: :post, data: { controller: "likert", target: "likert.form" }) do |f|
       .likert-scale
         .columns
           = f.collection_radio_buttons(:answer, LikertScale.all, :score, :name) do |builder|
-            .column
-              = builder.label(class: "radio") do
-                .radio-button= builder.radio_button
-                = builder.text
+            = builder.label(data: { target: "likert.label" }, class: "radio column") do
+              .radio-button= builder.radio_button(data: { target: "likert.radio", action: "likert#select" })
+              = builder.text
 
         = f.submit("Continue", class: "button is-large is-primary")
 
@@ -20,8 +19,15 @@
         - if @wizard.previous
           = link_to(answer_survey_question_path(@wizard.survey_response, @wizard.previous.position)) do
             = fa_icon("arrow-left", text: "Previous")
+        - else
+          = link_to("#", class: "muted") do
+            = fa_icon("arrow-left", text: "Previous")
+
 
       .level-right
         - if @wizard.can_manually_proceed?
           = link_to(next_question_path) do
+            = fa_icon("arrow-right", text: "Next", right: true)
+        - else
+          = link_to("#", class: "muted") do
             = fa_icon("arrow-right", text: "Next", right: true)

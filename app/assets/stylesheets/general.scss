@@ -1,3 +1,12 @@
 .centered {
   text-align: center;
 }
+
+.muted {
+  color: #ccc;
+}
+
+a.muted:hover {
+  color: #ccc;
+  cursor: default;
+}
