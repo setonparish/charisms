@@ -16,6 +16,7 @@ gem 'haml-rails'
 gem 'sass-rails'
 gem 'turbolinks'
 gem 'uglifier'
+gem 'webpacker'
 
 group :development do
   gem 'awesome_print'
