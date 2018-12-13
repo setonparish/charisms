@@ -14,6 +14,7 @@ class CharismScoreCreator
   def run
     charism_score_hash.map do |charism, question_responses|
       CharismScore.where(survey_response: @survey_response, charism: charism).first_or_initialize.tap do |cs|
+        cs.max_score = LikertScale.max_score * question_responses.size
         cs.score = question_responses.sum { |qr| qr.answer.to_i }
         cs.save!
       end

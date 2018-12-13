@@ -17,6 +17,10 @@ class LikertScale
     all.map(&:score)
   end
 
+  def self.max_score
+    OPTIONS.map { |hsh| hsh[:score] }.max
+  end
+
   attr_accessor :name, :score
 
   def initialize(name:, score:)

@@ -1,11 +1,18 @@
 %h1 Charism Scores
 
-- @charism_scores.each do |charism_score|
-  %h2== #{charism_score.charism.name} - #{charism_score.score}
-  %p= charism_score.charism.description
+%section{class: "charism-scores section"}
+  - @charism_scores.each_slice(2) do |charism_scores|
+    .tile.is-ancestor
+      - charism_scores.each do |charism_score|
+        .tile.is-parent
+          %article.tile.is-child.box.notification.is-primary{ data: { controller: "score-gauge" } }
+            .header.centered
+              %canvas.score{ data: { target: "score-gauge.container", score: "#{charism_score.score}", "max-score": "#{charism_score.max_score}" } }
+              %p.title== #{charism_score.charism.name} - #{charism_score.score}
 
-  %h3 Opportunities
-  - charism_score.charism.opportunities_for(@survey_organization).each do |opportunity|
-    %h4= opportunity.name
-    %p= opportunity.description
-  %hr
+            %p.subtitle= charism_score.charism.description
+
+            %h3 Opportunities
+            - charism_score.charism.opportunities_for(@survey_organization).each do |opportunity|
+              %h4= opportunity.name
+              %p= opportunity.description

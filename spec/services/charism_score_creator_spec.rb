@@ -20,10 +20,14 @@ describe CharismScoreCreator do
 
       aggregate_failures do
         expect(scores.size).to eq(2)
+
         expect(scores.first.score).to eq(3)
         expect(scores.first.charism).to eq(charism_one)
+        expect(scores.first.max_score).to eq(12)
+
         expect(scores.second.score).to eq(2)
         expect(scores.second.charism).to eq(charism_two)
+        expect(scores.second.max_score).to eq(4)
       end
     end
   end

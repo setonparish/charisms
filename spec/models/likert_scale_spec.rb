@@ -7,6 +7,12 @@ describe LikertScale do
     end
   end
 
+  describe ".max_score" do
+    it "is 4" do
+      expect(LikertScale.max_score).to eq(4)
+    end
+  end
+
   describe ".scores" do
     it "returns the correct numerical valud" do
       expect(LikertScale.scores).to eq((0..4).to_a)

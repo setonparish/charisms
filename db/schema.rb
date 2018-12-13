@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_28_014353) do
+ActiveRecord::Schema.define(version: 2018_12_13_205943) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 2018_09_28_014353) do
     t.integer "score"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "max_score", default: 0
     t.index ["charism_id"], name: "index_charism_scores_on_charism_id"
     t.index ["survey_response_id"], name: "index_charism_scores_on_survey_response_id"
   end
