@@ -13,7 +13,7 @@ export default class extends Controller {
   }
 
   submit() {
-    this.formTarget.submit();
+    Rails.fire(this.formTarget, 'submit');
   }
 
   highlight() {

@@ -2,7 +2,7 @@
   .container.centered
     %h1.title= @wizard.current.question.text
 
-    = form_for(@wizard.current, url: answer_survey_question_path(@wizard.survey_response, @wizard.current.position), method: :post, data: { controller: "likert", target: "likert.form" }) do |f|
+    = form_for(@wizard.current, url: answer_survey_question_path(@wizard.survey_response, @wizard.current.position), remote: true, authenticity_token: true, method: :post, data: { controller: "likert", target: "likert.form" }) do |f|
       .likert-scale
         .columns
           = f.collection_radio_buttons(:answer, LikertScale.all, :score, :name) do |builder|
