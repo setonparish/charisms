@@ -1,10 +1,17 @@
 import { Controller } from "stimulus"
 
 export default class extends Controller {
-  static targets = ["form", "label", "radio"];
+  static targets = ["container", "form", "label", "radio"];
 
   initialize() {
     this.highlight();
+
+    TurbolinksAnimate.init({
+      element: this.containerTarget,
+      animation: 'slideinright',
+      reversedDisappearing: true,
+      duration: "0.6s"
+    });
   }
 
   select(event) {

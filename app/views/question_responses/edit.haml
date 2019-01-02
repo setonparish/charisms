@@ -1,8 +1,8 @@
-%section{class: "section"}
-  .container.centered
+%section{class: "section likert"}
+  .container.centered{ data: { controller: "likert", target: "likert.container" } }
     %h1.title= @wizard.current.question.text
 
-    = form_for(@wizard.current, url: answer_survey_question_path(@wizard.survey_response, @wizard.current.position), remote: true, authenticity_token: true, method: :post, data: { controller: "likert", target: "likert.form" }) do |f|
+    = form_for(@wizard.current, url: answer_survey_question_path(@wizard.survey_response, @wizard.current.position), remote: true, authenticity_token: true, method: :post, data: { target: "likert.form" }) do |f|
       .likert-scale
         .columns
           = f.collection_radio_buttons(:answer, LikertScale.all, :score, :name) do |builder|
@@ -14,7 +14,7 @@
 
     %hr
 
-    .level.is-mobile
+    .level.is-mobile{ data: { "turbolinks-animate-persist": "true" } }
       .level-left
         - if @wizard.previous
           = link_to(answer_survey_question_path(@wizard.survey_response, @wizard.previous.position)) do
@@ -26,7 +26,7 @@
 
       .level-right
         - if @wizard.can_manually_proceed?
-          = link_to(next_question_path) do
+          = link_to(next_question_path, { data: { action: "likert#animateSlideNext" } }) do
             = fa_icon("arrow-right", text: "Next", right: true)
         - else
           = link_to("#", class: "muted") do
