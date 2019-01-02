@@ -7,7 +7,9 @@ export default class extends Controller {
     this.highlight();
   }
 
-  select() {
+  select(event) {
+    event.stopImmediatePropagation();
+
     this.highlight();
     this.submit();
   }
