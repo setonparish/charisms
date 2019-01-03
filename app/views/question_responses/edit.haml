@@ -26,7 +26,7 @@
 
 
       .level-right
-        - if @wizard.can_manually_proceed?
+        - if @wizard.can_manually_proceed? || @wizard.survey_completed?
           = link_to(next_question_path) do
             = fa_icon("arrow-right", text: "Next", right: true)
         - else
