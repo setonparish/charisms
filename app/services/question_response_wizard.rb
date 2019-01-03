@@ -8,19 +8,25 @@ class QuestionResponseWizard
   end
 
   def current
-    @current ||= begin
-      @question_response ||
-        @survey_response.question_responses.unanswered.first ||
-        @survey_response.question_responses.last
-    end
+    @question_response ||
+    questions.detect(&:unanswered?) ||
+    questions.last
+  end
+
+  def question_number
+    current.position
+  end
+
+  def number_questions
+    questions.size
   end
 
   def previous
-    @previous ||= previous_questions.last
+    previous_questions.last
   end
 
   def next
-    @next ||= remaining_questions.first
+    remaining_questions.first
   end
 
   def can_manually_proceed?
@@ -28,21 +34,25 @@ class QuestionResponseWizard
   end
 
   def only_unanswered_questions_remaining?
-    remaining_questions.answered.none?
+    remaining_questions.all?(&:unanswered?)
   end
 
   def survey_completed?
-    @survey_response.question_responses.unanswered.count.zero?
+    questions.all?(&:answered?)
   end
 
 
   private
 
   def previous_questions
-    @survey_response.question_responses.where("id < ?", current)
+    questions.select { |q| q.id < current.id }
   end
 
   def remaining_questions
-    @survey_response.question_responses.where("id > ?", current)
+    questions.select { |q| q.id > current.id }
+  end
+
+  def questions
+    @questions ||= @survey_response.question_responses.order(:position)
   end
 end

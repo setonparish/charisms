@@ -1,5 +1,6 @@
 %section{class: "section likert"}
   .container.centered{ data: { controller: "likert", target: "likert.container" } }
+    %p.muted== #{@wizard.question_number} of #{@wizard.number_questions}
     %h1.title= @wizard.current.question.text
 
     = form_for(@wizard.current, url: answer_survey_question_path(@wizard.survey_response, @wizard.current.position), remote: true, authenticity_token: true, method: :post, data: { target: "likert.form" }) do |f|

@@ -52,7 +52,7 @@ describe QuestionResponseWizard do
     describe "#can_manually_proceed?" do
       context "if current question is answered and there is a next question" do
         it "returns true" do
-          service.current.answer = "cantical of the sun"
+          allow(service.current).to receive(:answered?).and_return(true)
           expect(service.can_manually_proceed?).to eq(true)
         end
       end
