@@ -21,14 +21,14 @@
           = link_to(answer_survey_question_path(@wizard.survey_response, @wizard.previous.position)) do
             = fa_icon("arrow-left", text: "Previous")
         - else
-          = link_to("#", class: "muted") do
+          = disabled_link_to(class: "muted") do
             = fa_icon("arrow-left", text: "Previous")
 
 
       .level-right
         - if @wizard.can_manually_proceed?
-          = link_to(next_question_path, { data: { action: "likert#animateSlideNext" } }) do
+          = link_to(next_question_path) do
             = fa_icon("arrow-right", text: "Next", right: true)
         - else
-          = link_to("#", class: "muted") do
+          = disabled_link_to(class: "muted") do
             = fa_icon("arrow-right", text: "Next", right: true)
