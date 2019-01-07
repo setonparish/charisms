@@ -12,5 +12,13 @@
 //
 //= require rails-ujs
 //= require turbolinks
+//= require jquery3
+//= require popper
+//= require bootstrap
 //= require gauge.min
+
+//= require template/vendor/chart.js/dist/Chart.min.js
+//= require template/vendor/chart.js/dist/Chart.extension.js
+//= require template/argon.js
+
 //= require_tree .
