@@ -12,163 +12,34 @@
 
 
 
-/ Sidenav
-%nav#sidenav-main.navbar.navbar-vertical.fixed-left.navbar-expand-md.navbar-light.bg-white
-  .container-fluid
-    / Toggler
-    %button.navbar-toggler{"aria-controls" => "sidenav-main", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#sidenav-collapse-main", "data-toggle" => "collapse", :type => "button"}
-      %span.navbar-toggler-icon
-    / Brand
-    %a.navbar-brand.pt-0{:href => "./index.html"}
-      = image_tag("blue.png", class: "navbar-brand-img")
-    / User
-    %ul.nav.align-items-center.d-md-none
-      %li.nav-item.dropdown
-        %a.nav-link.nav-link-icon{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
-          %i.ni.ni-bell-55
-        .dropdown-menu.dropdown-menu-arrow.dropdown-menu-right{"aria-labelledby" => "navbar-default_dropdown_1"}
-          %a.dropdown-item{:href => "#"} Action
-          %a.dropdown-item{:href => "#"} Another action
-          .dropdown-divider
-          %a.dropdown-item{:href => "#"} Something else here
-      %li.nav-item.dropdown
-        %a.nav-link{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
-          .media.align-items-center
-            %span.avatar.avatar-sm.rounded-circle
-              = image_tag("sketch.jpg")
-        .dropdown-menu.dropdown-menu-arrow.dropdown-menu-right
-          .dropdown-header.noti-title
-            %h6.text-overflow.m-0 Welcome!
-          %a.dropdown-item{:href => "./examples/profile.html"}
-            %i.ni.ni-single-02
-            %span My profile
-          %a.dropdown-item{:href => "./examples/profile.html"}
-            %i.ni.ni-settings-gear-65
-            %span Settings
-          %a.dropdown-item{:href => "./examples/profile.html"}
-            %i.ni.ni-calendar-grid-58
-            %span Activity
-          %a.dropdown-item{:href => "./examples/profile.html"}
-            %i.ni.ni-support-16
-            %span Support
-          .dropdown-divider
-          %a.dropdown-item{:href => "#!"}
-            %i.ni.ni-user-run
-            %span Logout
-    / Collapse
-    #sidenav-collapse-main.collapse.navbar-collapse
-      / Collapse header
-      .navbar-collapse-header.d-md-none
-        .row
-          .col-6.collapse-brand
-            %a{:href => "./index.html"}
-              = image_tag("blue.png")
-          .col-6.collapse-close
-            %button.navbar-toggler{"aria-controls" => "sidenav-main", "aria-expanded" => "false", "aria-label" => "Toggle sidenav", "data-target" => "#sidenav-collapse-main", "data-toggle" => "collapse", :type => "button"}
-              %span
-              %span
-      / Form
-      %form.mt-4.mb-3.d-md-none
-        .input-group.input-group-rounded.input-group-merge
-          %input.form-control.form-control-rounded.form-control-prepended{"aria-label" => "Search", :placeholder => "Search", :type => "search"}/
-          .input-group-prepend
-            .input-group-text
-              %span.fa.fa-search
-      / Navigation
-      %ul.navbar-nav
-        %li.nav-item
-          %a.nav-link{:href => "./index.html"}
-            %i.ni.ni-tv-2.text-primary
-            Dashboard
-        %li.nav-item
-          %a.nav-link{:href => "./examples/icons.html"}
-            %i.ni.ni-planet.text-blue
-            Icons
-        %li.nav-item
-          %a.nav-link{:href => "./examples/maps.html"}
-            %i.ni.ni-pin-3.text-orange
-            Maps
-        %li.nav-item
-          %a.nav-link{:href => "./examples/profile.html"}
-            %i.ni.ni-single-02.text-yellow
-            User profile
-        %li.nav-item
-          %a.nav-link{:href => "./examples/tables.html"}
-            %i.ni.ni-bullet-list-67.text-red
-            Tables
-        %li.nav-item
-          %a.nav-link{:href => "./examples/login.html"}
-            %i.ni.ni-key-25.text-info
-            Login
-        %li.nav-item
-          %a.nav-link{:href => "./examples/register.html"}
-            %i.ni.ni-circle-08.text-pink
-            Register
-      / Divider
-      %hr.my-3/
-      / Heading
-      %h6.navbar-heading.text-muted Documentation
-      / Navigation
-      %ul.navbar-nav.mb-md-3
-        %li.nav-item
-          %a.nav-link{:href => "https://demos.creative-tim.com/argon-dashboard/docs/getting-started/overview.html"}
-            %i.ni.ni-spaceship
-            Getting started
-        %li.nav-item
-          %a.nav-link{:href => "https://demos.creative-tim.com/argon-dashboard/docs/foundation/colors.html"}
-            %i.ni.ni-palette
-            Foundation
-        %li.nav-item
-          %a.nav-link{:href => "https://demos.creative-tim.com/argon-dashboard/docs/components/alerts.html"}
-            %i.ni.ni-ui-04
-            Components
-/ Main content
+/ Side navigation
+= render "organizer/shared/navigation"
+
 .main-content
   / Top navbar
   %nav#navbar-main.navbar.navbar-top.navbar-expand-md.navbar-dark
     .container-fluid
-      / Brand
-      %a.h4.mb-0.text-white.text-uppercase.d-none.d-lg-inline-block{:href => "./index.html"} Dashboard
-      / Form
-      %form.navbar-search.navbar-search-dark.form-inline.mr-3.d-none.d-md-flex.ml-lg-auto
-        .form-group.mb-0
-          .input-group.input-group-alternative
-            .input-group-prepend
-              %span.input-group-text
-                %i.fas.fa-search
-            %input.form-control{:placeholder => "Search", :type => "text"}/
-      / User
+      / Logo
+      %a.h4.mb-0.text-white.text-uppercase.d-none.d-lg-inline-block{href: organizer_dashboard_path} Dashboard
+
+      / User profile dropdown
       %ul.navbar-nav.align-items-center.d-none.d-md-flex
         %li.nav-item.dropdown
-          %a.nav-link.pr-0{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
+          %a.nav-link.pr-0{"aria-expanded": "false", "aria-haspopup": "true", "data-toggle": "dropdown", href: "#", :role => "button"}
             .media.align-items-center
               %span.avatar.avatar-sm.rounded-circle
                 = image_tag("sketch.jpg")
               .media-body.ml-2.d-none.d-lg-block
                 %span.mb-0.text-sm.font-weight-bold== #{current_user.first_name} #{current_user.last_name}
-          .dropdown-menu.dropdown-menu-arrow.dropdown-menu-right
-            .dropdown-header.noti-title
-              %h6.text-overflow.m-0 Welcome!
-            %a.dropdown-item{:href => "./examples/profile.html"}
-              %i.ni.ni-single-02
-              %span My profile
-            %a.dropdown-item{:href => "./examples/profile.html"}
-              %i.ni.ni-settings-gear-65
-              %span Settings
-            %a.dropdown-item{:href => "./examples/profile.html"}
-              %i.ni.ni-calendar-grid-58
-              %span Activity
-            %a.dropdown-item{:href => "./examples/profile.html"}
-              %i.ni.ni-support-16
-              %span Support
-            .dropdown-divider
-            %a.dropdown-item{:href => "#!"}
-              %i.ni.ni-user-run
-              %span Logout
+          = render "organizer/shared/profile_navigation"
+
   / Header
   .header.bg-gradient-primary.pb-8.pt-5.pt-md-8
     .container-fluid
       .header-body
+
+
+
         / Card stats
         .row
           .col-xl-3.col-lg-6
@@ -243,12 +114,12 @@
                 %h2.text-white.mb-0 Sales value
               .col
                 %ul.nav.nav-pills.justify-content-end
-                  %li.nav-item.mr-2.mr-md-0{"data-prefix" => "$", "data-suffix" => "k", "data-target" => "#chart-sales", "data-toggle" => "chart", "data-update" => "{\"data\":{\"datasets\":[{\"data\":[0, 20, 10, 30, 15, 40, 20, 60, 60]}]}}"}
-                    %a.nav-link.py-2.px-3.active{"data-toggle" => "tab", :href => "#"}
+                  %li.nav-item.mr-2.mr-md-0{"data-prefix": "$", "data-suffix": "k", "data-target": "#chart-sales", "data-toggle": "chart", "data-update": "{\"data\":{\"datasets\":[{\"data\":[0, 20, 10, 30, 15, 40, 20, 60, 60]}]}}"}
+                    %a.nav-link.py-2.px-3.active{"data-toggle": "tab", href: "#"}
                       %span.d-none.d-md-block Month
                       %span.d-md-none M
-                  %li.nav-item{"data-prefix" => "$", "data-suffix" => "k", "data-target" => "#chart-sales", "data-toggle" => "chart", "data-update" => "{\"data\":{\"datasets\":[{\"data\":[0, 20, 5, 25, 10, 30, 15, 40, 40]}]}}"}
-                    %a.nav-link.py-2.px-3{"data-toggle" => "tab", :href => "#"}
+                  %li.nav-item{"data-prefix": "$", "data-suffix": "k", "data-target": "#chart-sales", "data-toggle": "chart", "data-update": "{\"data\":{\"datasets\":[{\"data\":[0, 20, 5, 25, 10, 30, 15, 40, 40]}]}}"}
+                    %a.nav-link.py-2.px-3{"data-toggle": "tab", href: "#"}
                       %span.d-none.d-md-block Week
                       %span.d-md-none W
           .card-body
@@ -275,7 +146,7 @@
               .col
                 %h3.mb-0 Page visits
               .col.text-right
-                %a.btn.btn-sm.btn-primary{:href => "#!"} See all
+                %a.btn.btn-sm.btn-primary{href: "#!"} See all
           .table-responsive
             / Projects table
             %table.table.align-items-center.table-flush
@@ -343,7 +214,7 @@
               .col
                 %h3.mb-0 Social traffic
               .col.text-right
-                %a.btn.btn-sm.btn-primary{:href => "#!"} See all
+                %a.btn.btn-sm.btn-primary{href: "#!"} See all
           .table-responsive
             / Projects table
             %table.table.align-items-center.table-flush
@@ -363,7 +234,7 @@
                       %span.mr-2 60%
                       %div
                         .progress
-                          .progress-bar.bg-gradient-danger{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "60", :role => "progressbar", :style => "width: 60%;"}
+                          .progress-bar.bg-gradient-danger{"aria-valuemax": "100", "aria-valuemin": "0", "aria-valuenow": "60", :role => "progressbar", :style => "width: 60%;"}
                 %tr
                   %th{:scope => "row"}
                     Facebook
@@ -374,7 +245,7 @@
                       %span.mr-2 70%
                       %div
                         .progress
-                          .progress-bar.bg-gradient-success{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "70", :role => "progressbar", :style => "width: 70%;"}
+                          .progress-bar.bg-gradient-success{"aria-valuemax": "100", "aria-valuemin": "0", "aria-valuenow": "70", :role => "progressbar", :style => "width: 70%;"}
                 %tr
                   %th{:scope => "row"}
                     Google
@@ -385,7 +256,7 @@
                       %span.mr-2 80%
                       %div
                         .progress
-                          .progress-bar.bg-gradient-primary{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "80", :role => "progressbar", :style => "width: 80%;"}
+                          .progress-bar.bg-gradient-primary{"aria-valuemax": "100", "aria-valuemin": "0", "aria-valuenow": "80", :role => "progressbar", :style => "width: 80%;"}
                 %tr
                   %th{:scope => "row"}
                     Instagram
@@ -396,7 +267,7 @@
                       %span.mr-2 75%
                       %div
                         .progress
-                          .progress-bar.bg-gradient-info{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "75", :role => "progressbar", :style => "width: 75%;"}
+                          .progress-bar.bg-gradient-info{"aria-valuemax": "100", "aria-valuemin": "0", "aria-valuenow": "75", :role => "progressbar", :style => "width: 75%;"}
                 %tr
                   %th{:scope => "row"}
                     twitter
@@ -407,21 +278,21 @@
                       %span.mr-2 30%
                       %div
                         .progress
-                          .progress-bar.bg-gradient-warning{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "30", :role => "progressbar", :style => "width: 30%;"}
+                          .progress-bar.bg-gradient-warning{"aria-valuemax": "100", "aria-valuemin": "0", "aria-valuenow": "30", :role => "progressbar", :style => "width: 30%;"}
     / Footer
     %footer.footer
       .row.align-items-center.justify-content-xl-between
         .col-xl-6
           .copyright.text-center.text-xl-left.text-muted
             © 2018
-            %a.font-weight-bold.ml-1{:href => "https://www.creative-tim.com", :target => "_blank"} Creative Tim
+            %a.font-weight-bold.ml-1{href: "https://www.creative-tim.com", :target => "_blank"} Creative Tim
         .col-xl-6
           %ul.nav.nav-footer.justify-content-center.justify-content-xl-end
             %li.nav-item
-              %a.nav-link{:href => "https://www.creative-tim.com", :target => "_blank"} Creative Tim
+              %a.nav-link{href: "https://www.creative-tim.com", :target => "_blank"} Creative Tim
             %li.nav-item
-              %a.nav-link{:href => "https://www.creative-tim.com/presentation", :target => "_blank"} About Us
+              %a.nav-link{href: "https://www.creative-tim.com/presentation", :target => "_blank"} About Us
             %li.nav-item
-              %a.nav-link{:href => "http://blog.creative-tim.com", :target => "_blank"} Blog
+              %a.nav-link{href: "http://blog.creative-tim.com", :target => "_blank"} Blog
             %li.nav-item
-              %a.nav-link{:href => "https://github.com/creativetimofficial/argon-dashboard/blob/master/LICENSE.md", :target => "_blank"} MIT License
+              %a.nav-link{href: "https://github.com/creativetimofficial/argon-dashboard/blob/master/LICENSE.md", :target => "_blank"} MIT License

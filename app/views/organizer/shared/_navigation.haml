@@ -1,6 +1,48 @@
-%ul
-  %li= link_to("Web Links", organizer_web_links_path)
-  %li= link_to("Reports", organizer_reports_path)
-  %li= link_to("Opportunities", organizer_opportunities_path)
-  %li= link_to("Organization", edit_organizer_organization_path)
-  %li= link_to("Profile", edit_organizer_profile_path)
+%nav#sidenav-main.navbar.navbar-vertical.fixed-left.navbar-expand-md.navbar-light.bg-white
+  .container-fluid
+    / Toggler
+    %button.navbar-toggler{"aria-controls": "sidenav-main", "aria-expanded": "false", "aria-label": "Toggle navigation", "data-target": "#sidenav-collapse-main", "data-toggle": "collapse", type: "button"}
+      %span.navbar-toggler-icon
+
+    / Logo
+    %a.navbar-brand.pt-0{href: organizer_dashboard_path}
+      = image_tag("blue.png", class: "navbar-brand-img")
+
+    / User profile dropdown
+    %ul.nav.align-items-center.d-md-none
+      %li.nav-item.dropdown
+        %a.nav-link{"aria-expanded": "false", "aria-haspopup": "true", "data-toggle": "dropdown", href: "#", role: "button"}
+          .media.align-items-center
+            %span.avatar.avatar-sm.rounded-circle
+              = image_tag("sketch.jpg")
+        = render "organizer/shared/profile_navigation"
+
+    / Sidebar navigation
+    #sidenav-collapse-main.collapse.navbar-collapse
+      .navbar-collapse-header.d-md-none
+        .row
+          .col-6.collapse-brand
+            %a{href: "./index.html"}
+              = image_tag("blue.png")
+          .col-6.collapse-close
+            %button.navbar-toggler{"aria-controls": "sidenav-main", "aria-expanded": "false", "aria-label": "Toggle sidenav", "data-target": "#sidenav-collapse-main", "data-toggle": "collapse", type: "button"}
+              %span
+              %span
+      %h6.navbar-heading.text-muted== #{current_organization.name}
+      %ul.navbar-nav
+        %li.nav-item
+          = link_to(organizer_dashboard_path, class: "nav-link") do
+            %i.ni.ni-tv-2.text-primary
+            Dashboard
+        %li.nav-item
+          = link_to(organizer_reports_path, class: "nav-link") do
+            %i.ni.ni-calendar-grid-58
+            Reports
+        %li.nav-item
+          = link_to(organizer_web_links_path, class: "nav-link") do
+            %i.ni.ni-planet.text-blue
+            Web Links
+        %li.nav-item
+          = link_to(organizer_opportunities_path, class: "nav-link") do
+            %i.ni.ni-pin-3.text-orange
+            Opportunities
