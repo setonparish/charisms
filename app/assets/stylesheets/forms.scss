@@ -6,13 +6,15 @@
     display: none;
   }
 
-  .column {
-    padding: 10px;
+  .target {
+    padding: 5px;
     margin: 2px;
 
     border: 1px solid transparent; // prevent "jumping" during hover
     transition: background-color .75s ease-in-out;
     transition: border .15s ease-in-out;
+
+    min-width: 150px;
 
     .radio-button {
       margin-bottom: 10px;

@@ -1,7 +1,11 @@
-@import "bulma";
+
+@import "template/argon";
+@import "bootstrap";
 @import "font-awesome";
 @import "animate.css/animate.css";
+@import "template/vendor/nucleo/css/nucleo.css";
+@import "template/vendor/@fortawesome/fontawesome-free/css/all.min.css";
 
-@import "charism-scores";
-@import "forms";
-@import "general";
+// @import "charism-scores";
+// @import "forms";
+// @import "general";

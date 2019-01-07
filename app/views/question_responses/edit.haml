@@ -1,34 +1,31 @@
-%section{class: "section likert"}
-  .container.centered{ data: { controller: "likert", target: "likert.container" } }
-    %p.muted== #{@wizard.question_number} of #{@wizard.number_questions}
-    %h1.title= @wizard.current.question.text
+.container.text-center.likert{ data: { controller: "likert", target: "likert.container" } }
+  %p.lead.text-muted== #{@wizard.question_number} of #{@wizard.number_questions}
+  %h1.jumbotron-heading= @wizard.current.question.text
 
-    = form_for(@wizard.current, url: answer_survey_question_path(@wizard.survey_response, @wizard.current.position), remote: true, authenticity_token: true, method: :post, data: { target: "likert.form" }) do |f|
-      .likert-scale
-        .columns
-          = f.collection_radio_buttons(:answer, LikertScale.all, :score, :name) do |builder|
-            = builder.label(data: { target: "likert.label" }, class: "radio column") do
-              .radio-button= builder.radio_button(data: { target: "likert.radio", action: "likert#select" })
-              = builder.text
+  = form_for(@wizard.current, url: answer_survey_question_path(@wizard.survey_response, @wizard.current.position), remote: true, authenticity_token: true, method: :post, data: { target: "likert.form" }) do |f|
+    .container
+      .row.likert-scale
+        = f.collection_radio_buttons(:answer, LikertScale.all, :score, :name) do |builder|
+          = builder.label(data:{ target: "likert.label" }, class: "col-md rounded rado target") do
+            .radio= builder.radio_button(data: { target: "likert.radio", action: "likert#select" })
+            = builder.text
+        .w-100
 
-        = f.submit("Continue", class: "button is-large is-primary")
+          = f.submit("Continue", class: "button is-large is-primary")
 
-    %hr
+  %hr
 
-    .level.is-mobile{ data: { "turbolinks-animate-persist": "true" } }
-      .level-left
-        - if @wizard.previous
-          = link_to(answer_survey_question_path(@wizard.survey_response, @wizard.previous.position)) do
-            = fa_icon("arrow-left", text: "Previous")
-        - else
-          = disabled_link_to(class: "muted") do
-            = fa_icon("arrow-left", text: "Previous")
+  %div{ data: { "turbolinks-animate-persist": "true" } }
+    - if @wizard.previous
+      = link_to(answer_survey_question_path(@wizard.survey_response, @wizard.previous.position)) do
+        = fa_icon("arrow-left", text: "Previous")
+    - else
+      = disabled_link_to(class: "muted") do
+        = fa_icon("arrow-left", text: "Previous")
 
-
-      .level-right
-        - if @wizard.can_manually_proceed? || @wizard.survey_completed?
-          = link_to(next_question_path) do
-            = fa_icon("arrow-right", text: "Next", right: true)
-        - else
-          = disabled_link_to(class: "muted") do
-            = fa_icon("arrow-right", text: "Next", right: true)
+    - if @wizard.can_manually_proceed? || @wizard.survey_completed?
+      = link_to(next_question_path) do
+        = fa_icon("arrow-right", text: "Next", right: true)
+    - else
+      = disabled_link_to(class: "muted") do
+        = fa_icon("arrow-right", text: "Next", right: true)

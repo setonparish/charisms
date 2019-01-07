@@ -9,7 +9,7 @@ gem 'rails', '~> 5.2.0'
 gem 'acts_as_list'
 gem 'bcrypt'
 gem 'bootsnap', require: false
-gem 'bulma-rails'
+gem 'bootstrap', '~> 4.2.1'
 gem 'font-awesome-rails'
 gem 'friendly_id'
 gem 'haml-rails'
