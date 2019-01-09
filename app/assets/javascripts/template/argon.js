@@ -992,65 +992,39 @@ var OrdersChart = $(document).on('turbolinks:load', function () {
 // Sales chart
 //
 
-var SalesChart = $(document).on('turbolinks:load', function () {
+var CharismChart = $(document).on('turbolinks:load', function () {
 
   // Variables
 
-  var $chart = $('#chart-sales');
-
+  var $chart = $('#pie-chart-top-charisms');
 
   // Methods
 
   function init($chart) {
+    let data = {
+      labels: [
+        'Red',
+        'Yellow',
+        'Blue'
+      ],
+      datasets: [{
+        data: [10, 20, 30],
+        backgroundColor: ["rgb(255, 99, 132)", "rgb(54, 162, 235)", "rgb(255, 205, 86)"]
+      }]
+    };
+
+    let options = {
+      cutoutPercentage: 40
+    };
 
     var salesChart = new Chart($chart, {
-      type: 'line',
-      options: {
-        scales: {
-          yAxes: [{
-            gridLines: {
-              color: Charts.colors.gray[900],
-              zeroLineColor: Charts.colors.gray[900]
-            },
-            ticks: {
-              callback: function (value) {
-                if (!(value % 10)) {
-                  return '$' + value + 'k';
-                }
-              }
-            }
-          }]
-        },
-        tooltips: {
-          callbacks: {
-            label: function (item, data) {
-              var label = data.datasets[item.datasetIndex].label || '';
-              var yLabel = item.yLabel;
-              var content = '';
-
-              if (data.datasets.length > 1) {
-                content += '<span class="popover-body-label mr-auto">' + label + '</span>';
-              }
-
-              content += '<span class="popover-body-value">$' + yLabel + 'k</span>';
-              return content;
-            }
-          }
-        }
-      },
-      data: {
-        labels: ['May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-        datasets: [{
-          label: 'Performance',
-          data: [0, 20, 10, 30, 15, 40, 20, 60, 60]
-        }]
-      }
+      type: 'doughnut',
+      data: data,
+      options: options
     });
 
     // Save to jQuery object
-
     $chart.data('chart', salesChart);
-
   };
 
 
