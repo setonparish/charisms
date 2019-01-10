@@ -1,6 +1,6 @@
 .row.justify-content-center
-  .col-lg-8.col-md-10{ data: { controller: "likert", target: "likert.container" } }
-    .container.text-center.likert
+  .col-lg-8.col-md-10{ data: { controller: "likert" } }
+    .container.text-center.likert{ data: { target: "likert.container" }}
       .card.bg-secondary.shadow.border-0
         .card-body.px-lg-5.py-lg-5
           .card-subtitle.text-muted== #{@wizard.question_number} of #{@wizard.number_questions}
@@ -16,7 +16,7 @@
             .form-group.text-center
               = f.submit "Continue", class: "btn btn-primary mt-4"
 
-          .row{ data: { "turbolinks-animate-persist": "true" } }
+          .row
             .col.text-left
               - if @wizard.previous
                 = link_to(answer_survey_question_path(@wizard.survey_response, @wizard.previous.position)) do

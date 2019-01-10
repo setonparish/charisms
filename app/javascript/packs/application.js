@@ -9,11 +9,6 @@
 
 import { Application } from "stimulus"
 import { definitionsFromContext } from "stimulus/webpack-helpers"
-import 'turbolinks-animate';
-document.addEventListener('turbolinks:load', function () {
-  TurbolinksAnimate.init({ element: document.querySelector('body.turbolinks-animate'), duration: "0.3s" });
-});
-
 
 const application = Application.start()
 const context = require.context("controllers", true, /.js$/)

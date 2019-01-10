@@ -5,24 +5,21 @@ export default class extends Controller {
 
   initialize() {
     this.highlight();
-
-    TurbolinksAnimate.init({
-      element: this.containerTarget,
-      animation: 'slideinright',
-      reversedDisappearing: true,
-      duration: "0.6s"
-    });
+    this.animateNext();
   }
 
   select(event) {
     event.stopImmediatePropagation();
-
     this.highlight();
     this.submit();
   }
 
   submit() {
-    Rails.fire(this.formTarget, 'submit');
+    this.animateDiscard();
+    const _this = this;
+    setTimeout(function () {
+      Rails.fire(_this.formTarget, 'submit');
+    }, 50);
   }
 
   highlight() {
@@ -43,4 +40,13 @@ export default class extends Controller {
       }
     });
   }
+
+  animateNext() {
+    this.containerTarget.classList.add('animated', 'slideInRight', 'faster');
+  }
+
+  animateDiscard() {
+    this.containerTarget.classList.add('animated', 'slideOutLeft', 'faster');
+  }
+
 }
