@@ -2,6 +2,8 @@ class QuestionResponsesController < ApplicationController
   before_action :assign_wizard
   helper_method :next_question_path
 
+  layout "survey"
+
   def edit
   end
 

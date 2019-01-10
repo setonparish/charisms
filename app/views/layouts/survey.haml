@@ -1,0 +1,20 @@
+!!!
+%html
+  %head
+    %meta{ content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type" }
+    %meta{ name: "viewport", content: "width=device-width, initial-scale=1"}
+    %title Charisms
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag "application", media: "all", "data-turbolinks-track": "reload"
+    = stylesheet_link_tag "application", media: "all", href: "//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700"
+    = javascript_include_tag "application", "data-turbolinks-track": "reload"
+  %body.bg-default
+    .main-content
+      .header.bg-gradient-primary.py-7.py-lg-8
+        .separator.separator-bottom.separator-skew.zindex-100
+          %svg{:preserveaspectratio => "none", :version => "1.1", :viewbox => "0 0 2560 100", :x => "0", :xmlns => "http://www.w3.org/2000/svg", :y => "0"}
+            %polygon.fill-default{:points => "2560 0 2560 100 0 100"}
+
+      .container.mt--8.pb-5
+        = yield

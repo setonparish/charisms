@@ -1,4 +1,6 @@
 class RespondentsController < ApplicationController
+  layout "survey"
+
   def new
     @respondent = Respondent.new
   end
@@ -8,7 +10,7 @@ class RespondentsController < ApplicationController
 
     if @respondent.save
       survey_response = SurveyResponseCreator.new(survey: web_link.survey, web_link: web_link, respondent: @respondent).run
-      redirect_to answer_survey_path(survey_response)
+      redirect_to answer_survey_path(survey_response), turbolinks: true
     else
       flash.now[:alert] = "Please fix the problems in the form below"
       render :new

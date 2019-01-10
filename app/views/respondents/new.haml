@@ -1,13 +1,21 @@
-%h1 Tell about yourself
+.row.justify-content-center
+    .col-lg-7.col-md-9
+        .card.bg-secondary.shadow.border-0
+            .card-body.px-lg-5.py-lg-5
+                %h1.card-title.text-center Tell us a bit about yourself.
+                %hr
 
-= form_for(@respondent) do |f|
-  = f.label :first_name
-  = f.text_field :first_name
-
-  = f.label :last_name
-  = f.text_field :last_name
-
-  = f.label :email
-  = f.text_field :email
-
-  = f.submit "Continue"
+                = form_for(@respondent, remote: true, authenticity_token: true) do |f|
+                    .form-group.row
+                        .col
+                            = f.label(:first_name, class: "form-control-label")
+                            = f.text_field(:first_name, class: "form-control")
+                        .col
+                            = f.label(:last_name, class: "form-control-label")
+                            = f.text_field(:last_name, class: "form-control")
+                    .form-group.row
+                        .col
+                            = f.label(:email, class: "form-control-label")
+                            = f.text_field(:email, placeholder: "me@example.com", class: "form-control")
+                    .text-center
+                        = f.submit "Continue", class: "btn btn-primary mt-4"
