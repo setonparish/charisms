@@ -12,6 +12,7 @@ gem 'bootsnap', require: false
 gem 'bootstrap', '~> 4.2.1'
 gem 'font-awesome-rails'
 gem 'friendly_id'
+# gem 'greensock-rails'
 gem 'haml-rails'
 gem 'jquery-rails'
 gem 'sass-rails'

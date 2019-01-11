@@ -1,26 +1,52 @@
 import { Controller } from "stimulus"
 
+let nextSlideDirection = 'left';
+
 export default class extends Controller {
   static targets = ["container", "form", "label", "radio"];
 
   initialize() {
     this.highlight();
-    this.animateNext();
+    this.slideIn(nextSlideDirection);
   }
 
   select(event) {
-    event.stopImmediatePropagation();
     this.highlight();
-    this.submit();
   }
 
   submit() {
-    this.animateDiscard();
-    const _this = this;
-    setTimeout(function () {
-      Rails.fire(_this.formTarget, 'submit');
-    }, 50);
+    this.slideOut('left', function () {
+      nextSlideDirection = 'left';
+      Rails.fire(this.formTarget, 'submit')
+    });
   }
+
+  previous(event) {
+    let url = event.currentTarget.href;
+    this.stopEvent(event);
+
+    nextSlideDirection = 'right';
+    this.slideOut('right', function () {
+      Turbolinks.visit(url);
+    });
+  }
+
+  next(event) {
+    let url = event.currentTarget.href;
+    this.stopEvent(event);
+
+    nextSlideDirection = 'left';
+    this.slideOut('left', function () {
+      Turbolinks.visit(url);
+    });
+  }
+
+  stopEvent(event) {
+    event.preventDefault();
+    event.stopImmediatePropagation()
+  }
+
+  // --- highlighing
 
   highlight() {
     this.clearHighlights();
@@ -41,12 +67,24 @@ export default class extends Controller {
     });
   }
 
-  animateNext() {
-    this.containerTarget.classList.add('animated', 'slideInRight', 'faster');
+  // --- card slide animation
+
+  slideIn(fromDirection = 'left', callback = () => { }) {
+    TweenMax.from(this.containerTarget, 0.60, {
+      left: (fromDirection === 'left' ? 3000 : -1000),
+      opacity: 0.25,
+      callbackScope: this,
+      onStart: callback
+    });
   }
 
-  animateDiscard() {
-    this.containerTarget.classList.add('animated', 'slideOutLeft', 'faster');
+  slideOut(toDirection = 'left', callback = () => { }) {
+    TweenMax.to(this.containerTarget, 0.60, {
+      left: (toDirection === 'left' ? -1000 : 3000),
+      opacity: 0.25,
+      callbackScope: this,
+      onStart: callback
+    });
   }
 
 }

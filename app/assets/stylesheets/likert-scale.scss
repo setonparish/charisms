@@ -1,0 +1,28 @@
+#likert-card {
+  position: relative;
+}
+
+.likert-scale {
+  .target {
+    padding: 10px;
+    margin: 5px;
+
+    border: 1px solid transparent; // prevent "jumping" during hover
+    transition: background-color .75s ease-in-out;
+    transition: border .15s ease-in-out;
+
+    .radio {
+      display:none;
+    }
+
+    &.selected {
+      color: $white;
+      background-color: $green;
+    }
+
+    &:hover, &.selected {
+      border: 1px solid $green;
+      border-radius: 5px;
+    }
+  }
+}

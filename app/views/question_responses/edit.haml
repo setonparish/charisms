@@ -1,6 +1,6 @@
 .row.justify-content-center
   .col-lg-8.col-md-10{ data: { controller: "likert" } }
-    .container.text-center.likert{ data: { target: "likert.container" }}
+    #likert-card.container.text-center.likert{ data: { target: "likert.container" }}
       .card.bg-secondary.shadow.border-0
         .card-body.px-lg-5.py-lg-5
           .card-subtitle.text-muted== #{@wizard.question_number} of #{@wizard.number_questions}
@@ -8,18 +8,18 @@
           %hr
 
           = form_for(@wizard.current, url: answer_survey_question_path(@wizard.survey_response, @wizard.current.position), remote: true, authenticity_token: true, method: :post, data: { target: "likert.form" }) do |f|
-            .form-group.row.likert-scale
+            #test.form-group.row.likert-scale
               = f.collection_radio_buttons(:answer, LikertScale.all, :score, :name) do |builder|
-                = builder.label(data:{ target: "likert.label" }, class: "col-md rounded rado target") do
+                = builder.label(data:{ target: "likert.label" }, class: "col-md my-auto rounded target") do
                   .radio= builder.radio_button(data: { target: "likert.radio", action: "likert#select" })
                   = builder.text
             .form-group.text-center
-              = f.submit "Continue", class: "btn btn-primary mt-4"
+              = f.submit "Continue", class: "btn btn-primary mt-4", data: { action: "likert#submit" }
 
           .row
             .col.text-left
               - if @wizard.previous
-                = link_to(answer_survey_question_path(@wizard.survey_response, @wizard.previous.position)) do
+                = link_to(answer_survey_question_path(@wizard.survey_response, @wizard.previous.position), data: { action: "likert#previous" }) do
                   = fa_icon("arrow-left", text: "Previous")
               - else
                 = disabled_link_to(class: "text-muted") do
@@ -27,7 +27,7 @@
 
             .col.text-right
               - if @wizard.can_manually_proceed? || @wizard.survey_completed?
-                = link_to(next_question_path) do
+                = link_to(next_question_path, data: { action: "likert#next" }) do
                   = fa_icon("arrow-right", text: "Next", right: true)
               - else
                 = disabled_link_to(class: "text-muted") do

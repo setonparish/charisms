@@ -38,11 +38,13 @@ class QuestionResponsesController < ApplicationController
   def next_question_path
     if !@wizard.next && @wizard.survey_completed?
       # charism score summary page
-      survey_result_path(@wizard.survey_response)
+      # survey_result_path(@wizard.survey_response)
+      answer_survey_question_path(@wizard.survey_response, @wizard.next.position)
 
     elsif @wizard.only_unanswered_questions_remaining?
       # survey path without specific question as part of path
-      answer_survey_path(@wizard.survey_response)
+      # answer_survey_path(@wizard.survey_response)
+      answer_survey_question_path(@wizard.survey_response, @wizard.next.position)
 
     else
       # survey path with specific question as part of path

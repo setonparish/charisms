@@ -79,6 +79,7 @@ GEM
       activerecord (>= 4.0.0)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
+    greensock-rails (1.20.4.0)
     haml (5.0.4)
       temple (>= 0.8.0)
       tilt
@@ -261,6 +262,7 @@ DEPENDENCIES
   factory_bot_rails
   font-awesome-rails
   friendly_id
+  greensock-rails
   haml-rails
   jquery-rails
   listen
